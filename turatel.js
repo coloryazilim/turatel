@@ -11,7 +11,7 @@ export class Turatel {
       UserName: '',
       PassWord: '',
       Type: 1,
-      Originator: 'KODER.'
+      Originator: ''
     }, auth);
 
     this.OPTIONS = _.extend({
