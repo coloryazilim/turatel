@@ -3,13 +3,10 @@ Turatel Sms Message Service for Meteor package.
 
 ``` javascript
 const SMS = new Turatel({
-  Command: 0,
-  PlatformID: 1,
+  Originator: '',
   ChannelCode: '',
   UserName: '',
-  PassWord: '',
-  Type: 1,
-  Originator: ''
+  PassWord: ''
 });
 
 SMS.send(<Message>, <Phones String|List>)
