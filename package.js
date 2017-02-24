@@ -1,6 +1,6 @@
 Package.describe({
   name: 'color:turatel',
-  version: '0.0.1',
+  version: '0.0.2',
   summary: 'Turatel Sms Message Services',
   git: 'https://github.com/coloryazilim/turatel.git',
   documentation: 'README.md'
