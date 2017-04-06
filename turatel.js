@@ -22,13 +22,22 @@ export class Turatel {
     }, options);
   }
 
-  toXml(options) {
+  sendSmsProvider(options) {
     return jsonxml({
       MainmsgBody: {
         ...this.AUTH,
         ...options
       }
     }, this.OPTIONS);
+  }
+
+  checkSmsProvider() {
+    return jsonxml({
+      MainReportRoot: {
+        Command: 6,
+        ..._.omit(this.AUTH, ['Command', 'Type', 'Originator'])
+      }
+    })
   }
 
   send(Mesgbody, NumbersOut, callback) {
@@ -39,7 +48,7 @@ export class Turatel {
     }
 
     // export xml.
-    const xmlData = this.toXml({ Mesgbody, Numbers });
+    const xmlData = this.sendSmsProvider({ Mesgbody, Numbers });
 
     if (this.OPTIONS.debug) {
       console.log(xmlData);
@@ -61,5 +70,15 @@ export class Turatel {
         }
       });
     }
+  }
+
+  checkSms(callback) {
+    request.post({
+      url: this.SEND_URL,
+      body: this.checkSmsProvider(),
+      headers: { 'Content-Type': 'text/xml' }
+    }, (error, response, body) => {
+      callback(error, parseInt(body));
+    })
   }
 }
